@@ -20,13 +20,9 @@ api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:ge
 @app.route('/', methods=['POST'])
 def get_response():
     try:
-        course = request.get_json().get('course')
-        target = request.get_json().get('target')
-        duration = request.get_json().get('duration')
-        module = request.get_json().get('module')
-        submodules = request.get_json().get('submodules')
+        coursename = request.get_json().get('coursename')
+        prerequisitelist=request.get_json().get('prerequisitelist')
         
-        submodules = " , ".join(submodules)
             # Define the request payload
         payload = {
             "contents": [
@@ -35,7 +31,7 @@ def get_response():
                         {
                             "text": 
                             f'''
-        Generate 8 easy, 6 medium and 6 hard level multiple choice questions which have only 4 options for the module {module} in the course "{course}" targeting {target}. The questions must include the concepts present in {submodules}. 
+        Generate 8 easy, 6 medium and 6 hard level multiple choice questions on prereqiusites which have only 4 options the course {coursename} which has prerequisites : {prerequisitelist} .Generate questions only based on prerequisites ani ivvu. 
                     Give output strictly in the following JSON format:
                     {{
                         "quizName": "string",
